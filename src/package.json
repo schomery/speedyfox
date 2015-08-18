@@ -1,0 +1,146 @@
+{
+  "name": "src",
+  "title": "Speed Tweaks (SpeedyFox)",
+  "id": "jid1-wZqm19rJzRkZUA",
+  "description": "This extension provides a list to almost all the settings that you may need to alter in order to enhance Firefox's speed.",
+  "author": "",
+  "license": "MPL 2.0",
+  "version": "0.1.0",
+  "icon": "data/icons/32.png",
+  "icon64": "data/icons/64.png",
+  "preferences": [
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.http.pipelining",
+      "value": true,
+      "title": "network.http.pipelining"
+    },
+    {
+      "description": "Recommended value is False",
+      "type": "bool",
+      "name": "network.http.pipelining.abtest",
+      "value": true,
+      "title": "network.http.pipelining.abtest"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.http.pipelining.aggressive",
+      "value": true,
+      "title": "network.http.pipelining.aggressive"
+    },
+    {
+      "description": "Recommended value is 3",
+      "type": "integer",
+      "name": "network.http.pipelining.max-optimistic-requests",
+      "value": 3,
+      "title": "network.http.pipelining.max-optimistic-requests"
+    },
+    {
+      "description": "Recommended value is 12",
+      "type": "integer",
+      "name": "network.http.pipelining.maxrequests",
+      "value": 12,
+      "title": "network.http.pipelining.maxrequests"
+    },
+    {
+      "description": "Recommended value is 300000",
+      "type": "integer",
+      "name": "network.http.pipelining.maxsize",
+      "value": 300000,
+      "title": "network.http.pipelining.maxsize"
+    },
+    {
+      "description": "Recommended value is 60000",
+      "type": "integer",
+      "name": "network.http.pipelining.read-timeout",
+      "value": 60000,
+      "title": "network.http.pipelining.read-timeout"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.http.pipelining.reschedule-on-timeout",
+      "value": true,
+      "title": "network.http.pipelining.reschedule-on-timeout"
+    },
+    {
+      "description": "Recommended value is 15000",
+      "type": "integer",
+      "name": "network.http.pipelining.reschedule-timeout",
+      "value": 15000,
+      "title": "network.http.pipelining.reschedule-timeout"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.http.pipelining.ssl",
+      "value": true,
+      "title": "network.http.pipelining.ssl"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.http.proxy.pipelining",
+      "value": true,
+      "title": "network.http.proxy.pipelining"
+    },
+    {
+      "description": "Recommended value is 256",
+      "type": "integer",
+      "name": "network.http.max-connections",
+      "value": 256,
+      "title": "network.http.max-connections"
+    },
+    {
+      "description": "Recommended value is 256",
+      "type": "integer",
+      "name": "network.http.max-persistent-connections-per-proxy",
+      "value": 256,
+      "title": "network.http.max-persistent-connections-per-proxy"
+    },
+    {
+      "description": "Recommended value is 6",
+      "type": "integer",
+      "name": "network.http.max-persistent-connections-per-server",
+      "value": 6,
+      "title": "network.http.max-persistent-connections-per-server"
+    },
+    {
+      "description": "Recommended value is 20",
+      "type": "integer",
+      "name": "network.http.redirection-limit",
+      "value": 20,
+      "title": "network.http.redirection-limit"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.http.fast-fallback-to-IPv4",
+      "value": true,
+      "title": "network.http.fast-fallback-to-IPv4"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.dns.disablePrefetch",
+      "value": true,
+      "title": "network.dns.disablePrefetch"
+    },
+    {
+      "description": "Recommended value is True",
+      "type": "bool",
+      "name": "network.prefetch-next",
+      "value": true,
+      "title": "network.prefetch-next"
+    },
+    {
+      "description": "Recommended value is 1",
+      "type": "integer",
+      "name": "browser.cache.use_new_backend",
+      "value": 1,
+      "title": "browser.cache.use_new_backend"
+    }
+  ]
+}
