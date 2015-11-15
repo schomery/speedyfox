@@ -3,9 +3,9 @@
   "title": "Speed Tweaks (SpeedyFox)",
   "id": "jid1-wZqm19rJzRkZUA",
   "description": "This extension provides a list to almost all the settings that you may need to alter in order to enhance Firefox's speed.",
-  "author": "",
+  "author": "Jeremy Schomery",
   "license": "MPL 2.0",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "icon": "data/icons/32.png",
   "icon64": "data/icons/64.png",
   "preferences": [
@@ -141,6 +141,36 @@
       "name": "browser.cache.use_new_backend",
       "value": 1,
       "title": "browser.cache.use_new_backend"
+    },
+    {
+      "type": "control",
+      "label": "Apply",
+      "name": "recommended-control",
+      "title": "Set recommended values for all preferences:"
+    },
+    {
+      "type": "control",
+      "label": "Apply",
+      "name": "reset-control",
+      "title": "Reset all preferences back to the factory values:"
+    },
+    {
+      "type": "control",
+      "label": "Open",
+      "name": "faq-control",
+      "title": "Open FAQ page"
+    },
+    {
+      "type": "control",
+      "label": "Open",
+      "name": "support-control",
+      "title": "Open spport page"
+    },
+    {
+      "type": "bool",
+      "name": "welcome",
+      "value": true,
+      "title": "Show welcome page on upgrades:"
     }
   ]
 }

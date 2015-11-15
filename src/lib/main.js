@@ -1,6 +1,10 @@
 'use strict';
 
 var sp = require('sdk/simple-prefs');
+var self = require('sdk/self');
+var timers = require('sdk/timers');
+var timers = require('sdk/timers');
+var tabs = require('sdk/tabs');
 var unload = require('sdk/system/unload');
 var {Cc, Ci} = require('chrome');
 var prefService = Cc['@mozilla.org/preferences-service;1']
@@ -38,7 +42,7 @@ function observe (pref, callback) {
   });
 }
 
-[
+var list = [
   'network.http.pipelining',
   'network.http.pipelining.abtest',
   'network.http.pipelining.aggressive',
@@ -58,7 +62,10 @@ function observe (pref, callback) {
   'network.dns.disablePrefetch',
   'network.prefetch-next',
   'browser.cache.use_new_backend'
-].forEach(function (pref) {
+];
+var values = [true, false, true, 3, 12, 300000, 60000, true, 15000, true, true, 256, 256, 6, 20, true, true, true, 1];
+
+list.forEach(function (pref) {
   sp.prefs[pref] = prefs.get(pref);
   observe(pref, function (p) {
     sp.prefs[p] = prefs.get(p);
@@ -66,4 +73,34 @@ function observe (pref, callback) {
   sp.on(pref, function (p) {
     prefs.set(p, sp.prefs[p]);
   });
+});
+
+exports.main = function (options) {
+  if (options.loadReason === 'install' || options.loadReason === 'startup') {
+    var version = sp.prefs.version;
+    if (self.version !== version) {
+      if (sp.prefs.welcome) {
+        timers.setTimeout(function () {
+          tabs.open(
+            'http://firefox.add0n.com/speed-tweaks.html?v=' + self.version +
+            (version ? '&p=' + version + '&type=upgrade' : '&type=install')
+          );
+        }, 3000);
+      }
+      sp.prefs.version = self.version;
+    }
+  }
+};
+
+sp.on('reset-control', function () {
+  list.forEach(prefs.reset);
+});
+sp.on('recommended-control', function () {
+  list.forEach((p, i) => prefs.set(p, values[i]));
+});
+sp.on('faq-control', function () {
+  tabs.open('http://firefox.add0n.com/speed-tweaks.html?type=m');
+});
+sp.on('support-control', function () {
+  tabs.open('https://github.com/schomery/speedyfox/issues');
 });
