@@ -1,13 +1,16 @@
 {
-  "name": "src",
   "title": "Speed Tweaks (SpeedyFox)",
-  "id": "jid1-wZqm19rJzRkZUA",
+  "name": "src",
+  "id": "jid1-wZqm19rJzRkZUA@jetpack",
   "description": "This extension provides a list to almost all the settings that you may need to alter in order to enhance Firefox's speed.",
   "author": "Jeremy Schomery",
   "license": "MPL 2.0",
-  "version": "0.1.2",
-  "icon": "data/icons/32.png",
-  "icon64": "data/icons/64.png",
+  "version": "0.1.4",
+  "main": "./lib/main.js",
+  "engines": {
+    "firefox": ">=29.0",
+    "fennec": ">=29.0"
+  },
   "preferences": [
     {
       "description": "Recommended value is True",
@@ -115,6 +118,13 @@
       "title": "network.http.redirection-limit"
     },
     {
+      "description": "Recommended value is 0",
+      "type": "integer",
+      "name": "network.http.speculative-parallel-limit",
+      "value": 6,
+      "title": "network.http.redirection-limit"
+    },
+    {
       "description": "Recommended value is True",
       "type": "bool",
       "name": "network.http.fast-fallback-to-IPv4",
@@ -122,14 +132,14 @@
       "title": "network.http.fast-fallback-to-IPv4"
     },
     {
-      "description": "Recommended value is True",
+      "description": "Recommended value is False",
       "type": "bool",
       "name": "network.dns.disablePrefetch",
-      "value": true,
+      "value": false,
       "title": "network.dns.disablePrefetch"
     },
     {
-      "description": "Recommended value is True",
+      "description": "Recommended value is False",
       "type": "bool",
       "name": "network.prefetch-next",
       "value": true,
@@ -170,7 +180,8 @@
       "type": "bool",
       "name": "welcome",
       "value": true,
-      "title": "Show welcome page on upgrades:"
+      "title": "Show welcome page on upgrades:",
+      "description": "Extension will notify you about the recent update by opening the welcome page."
     }
   ]
 }

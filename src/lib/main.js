@@ -58,12 +58,13 @@ var list = [
   'network.http.max-persistent-connections-per-proxy',
   'network.http.max-persistent-connections-per-server',
   'network.http.redirection-limit',
+  'network.http.speculative-parallel-limit',
   'network.http.fast-fallback-to-IPv4',
   'network.dns.disablePrefetch',
   'network.prefetch-next',
   'browser.cache.use_new_backend'
 ];
-var values = [true, false, true, 3, 12, 300000, 60000, true, 15000, true, true, 256, 256, 6, 20, true, true, true, 1];
+var values = [true, false, true, 3, 12, 300000, 60000, true, 15000, true, true, 256, 256, 6, 20, 0, false, true, false, 1];
 
 list.forEach(function (pref) {
   sp.prefs[pref] = prefs.get(pref);
@@ -94,9 +95,11 @@ exports.main = function (options) {
 
 sp.on('reset-control', function () {
   list.forEach(prefs.reset);
+  sp.prefs.welcome = true;
 });
 sp.on('recommended-control', function () {
   list.forEach((p, i) => prefs.set(p, values[i]));
+  sp.prefs.welcome = true;
 });
 sp.on('faq-control', function () {
   tabs.open('http://firefox.add0n.com/speed-tweaks.html?type=m');
