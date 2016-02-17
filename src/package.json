@@ -164,7 +164,7 @@
       "type": "control",
       "label": "Open",
       "name": "support-control",
-      "title": "Open spport page"
+      "title": "Open support page"
     },
     {
       "type": "bool",
