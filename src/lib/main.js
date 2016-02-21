@@ -64,7 +64,7 @@ var list = [
   'network.prefetch-next',
   'browser.cache.use_new_backend'
 ];
-var values = [true, false, true, 3, 12, 300000, 60000, true, 15000, true, true, 256, 256, 6, 20, 0, false, true, false, 1];
+var values = [true, false, true, 3, 12, 300000, 60000, true, 15000, true, true, 256, 256, 6, 20, 0, true, true, false, 1];
 
 list.forEach(function (pref) {
   sp.prefs[pref] = prefs.get(pref);

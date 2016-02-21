@@ -5,7 +5,7 @@
   "description": "This extension provides a list to almost all the settings that you may need to alter in order to enhance Firefox's speed.",
   "author": "Jeremy Schomery",
   "license": "MPL 2.0",
-  "version": "0.1.4",
+  "version": "0.1.5b1",
   "main": "./lib/main.js",
   "engines": {
     "firefox": ">=29.0",
@@ -122,7 +122,7 @@
       "type": "integer",
       "name": "network.http.speculative-parallel-limit",
       "value": 6,
-      "title": "network.http.redirection-limit"
+      "title": "network.http.speculative-parallel-limit"
     },
     {
       "description": "Recommended value is True",
@@ -132,7 +132,7 @@
       "title": "network.http.fast-fallback-to-IPv4"
     },
     {
-      "description": "Recommended value is False",
+      "description": "Recommended value is True",
       "type": "bool",
       "name": "network.dns.disablePrefetch",
       "value": false,
