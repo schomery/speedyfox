@@ -7,8 +7,10 @@ var timers = require('sdk/timers');
 var tabs = require('sdk/tabs');
 var unload = require('sdk/system/unload');
 var {Cc, Ci} = require('chrome');
+
 var prefService = Cc['@mozilla.org/preferences-service;1']
   .getService(Ci.nsIPrefService);
+
 var prefs = (function () {
   var p = require('sdk/preferences/service');
   return {
