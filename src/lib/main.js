@@ -6,10 +6,12 @@ var timers = require('sdk/timers');
 var timers = require('sdk/timers');
 var tabs = require('sdk/tabs');
 var unload = require('sdk/system/unload');
-var {Cc, Ci} = require('chrome');
+var {Cc, Ci, Cu} = require('chrome');
 
 var prefService = Cc['@mozilla.org/preferences-service;1']
   .getService(Ci.nsIPrefService);
+
+var {Services} = Cu.import('resource://gre/modules/Services.jsm');
 
 var prefs = (function () {
   var p = require('sdk/preferences/service');
@@ -79,6 +81,9 @@ list.forEach(function (pref) {
 });
 
 exports.main = function (options) {
+  if (options.loadReason === 'install') {
+    sp.prefs.backup = JSON.stringify(list.map(p => [p, prefs.get(p)]));
+  }
   if (options.loadReason === 'install' || options.loadReason === 'startup') {
     var version = sp.prefs.version;
     if (self.version !== version) {
@@ -91,6 +96,18 @@ exports.main = function (options) {
         }, 3000);
       }
       sp.prefs.version = self.version;
+    }
+  }
+};
+exports.onUnload = function (reason) {
+  if ((reason === 'uninstall' || reason === 'disable') && sp.prefs.backup) {
+    let doit = Services.prompt.confirm(
+      null,
+      'Speed Tweaks (SpeedyFox)',
+      'Would you like me to revert all the preferences back to their previous state?'
+    );
+    if (doit) {
+      JSON.parse(sp.prefs.backup).forEach(arr => prefs.set(arr[0], arr[1]));
     }
   }
 };
