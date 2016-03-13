@@ -3,13 +3,9 @@
 var sp = require('sdk/simple-prefs');
 var self = require('sdk/self');
 var timers = require('sdk/timers');
-var timers = require('sdk/timers');
 var tabs = require('sdk/tabs');
 var unload = require('sdk/system/unload');
-var {Cc, Ci, Cu} = require('chrome');
-
-var prefService = Cc['@mozilla.org/preferences-service;1']
-  .getService(Ci.nsIPrefService);
+var {Ci, Cc, Cu} = require('chrome');
 
 var {Services} = Cu.import('resource://gre/modules/Services.jsm');
 
@@ -33,59 +29,42 @@ var prefs = (function () {
   };
 })();
 
-function observe (pref, callback) {
-  var branch = prefService.getBranch(pref);
-  var observer = {
-    observe: function () {
-      callback(pref);
-    }
-  };
-  branch.addObserver('', observer, false);
-  unload.when(function () {
-    branch.removeObserver('', observer);
-  });
+var list = {
+  'network.http.pipelining': true,
+  'network.http.pipelining.abtest': false,
+  'network.http.pipelining.aggressive': true,
+  'network.http.pipelining.max-optimistic-requests': 3,
+  'network.http.pipelining.maxrequests': 12,
+  'network.http.pipelining.maxsize': 300000,
+  'network.http.pipelining.read-timeout': 60000,
+  'network.http.pipelining.reschedule-on-timeout': true,
+  'network.http.pipelining.reschedule-timeout': 15000,
+  'network.http.pipelining.ssl': true,
+  'network.http.proxy.pipelining': true,
+  'network.http.max-connections': 256,
+  'network.http.max-persistent-connections-per-proxy': 256,
+  'network.http.max-persistent-connections-per-server': 6,
+  'network.http.redirection-limit': 20,
+  'network.http.speculative-parallel-limit': 0,
+  'network.http.fast-fallback-to-IPv4': true,
+  'network.dns.disablePrefetch': true,
+  'network.prefetch-next': false,
+  'browser.cache.use_new_backend': 1
+};
+
+if (sp.prefs.welcome === undefined) {
+  sp.prefs.welcome = true;
 }
-
-var list = [
-  'network.http.pipelining',
-  'network.http.pipelining.abtest',
-  'network.http.pipelining.aggressive',
-  'network.http.pipelining.max-optimistic-requests',
-  'network.http.pipelining.maxrequests',
-  'network.http.pipelining.maxsize',
-  'network.http.pipelining.read-timeout',
-  'network.http.pipelining.reschedule-on-timeout',
-  'network.http.pipelining.reschedule-timeout',
-  'network.http.pipelining.ssl',
-  'network.http.proxy.pipelining',
-  'network.http.max-connections',
-  'network.http.max-persistent-connections-per-proxy',
-  'network.http.max-persistent-connections-per-server',
-  'network.http.redirection-limit',
-  'network.http.speculative-parallel-limit',
-  'network.http.fast-fallback-to-IPv4',
-  'network.dns.disablePrefetch',
-  'network.prefetch-next',
-  'browser.cache.use_new_backend'
-];
-var values = [true, false, true, 3, 12, 300000, 60000, true, 15000, true, true, 256, 256, 6, 20, 0, true, true, false, 1];
-
-list.forEach(function (pref) {
-  sp.prefs[pref] = prefs.get(pref);
-  observe(pref, function (p) {
-    sp.prefs[p] = prefs.get(p);
-  });
-  sp.on(pref, function (p) {
-    prefs.set(p, sp.prefs[p]);
-  });
-});
-
 exports.main = function (options) {
   if (options.loadReason === 'install') {
-    sp.prefs.backup = JSON.stringify(list.map(p => [p, prefs.get(p)]));
+    let tmp = [];
+    for (let p in list) {
+      tmp.push([p, prefs.get(p)]);
+    }
+    sp.prefs.backup = JSON.stringify(tmp);
   }
   if (options.loadReason === 'install' || options.loadReason === 'startup') {
-    var version = sp.prefs.version;
+    let version = sp.prefs.version;
     if (self.version !== version) {
       if (sp.prefs.welcome) {
         timers.setTimeout(function () {
@@ -112,17 +91,46 @@ exports.onUnload = function (reason) {
   }
 };
 
-sp.on('reset-control', function () {
-  list.forEach(prefs.reset);
-  sp.prefs.welcome = true;
-});
-sp.on('recommended-control', function () {
-  list.forEach((p, i) => prefs.set(p, values[i]));
-  sp.prefs.welcome = true;
-});
-sp.on('faq-control', function () {
-  tabs.open('http://firefox.add0n.com/speed-tweaks.html?type=m');
-});
-sp.on('support-control', function () {
-  tabs.open('https://github.com/schomery/speedyfox/issues');
+(function (observer) {
+  Services.obs.addObserver(observer, 'isteaks', false);
+  unload.when(function () {
+    Services.obs.removeObserver(observer, 'isteaks', false);
+  });
+})({
+  observe: function (aSubject, aTopic, aData) {
+    if (aTopic === 'isteaks' && aData === 'reset-control') {
+      for (let p in list) {
+        prefs.reset(p);
+      }
+      sp.prefs.welcome = true;
+    }
+    if (aTopic === 'isteaks' && aData === 'recommended-control') {
+      for (let p in list) {
+        prefs.set(p, list[p]);
+      }
+      sp.prefs.welcome = true;
+    }
+    if (aTopic === 'isteaks' && aData === 'clear-cache') {
+      let cacheService = Cc["@mozilla.org/network/cache-service;1"]
+        .getService(Ci.nsICacheService);
+
+      try {
+        cacheService.evictEntries(Ci.nsICache.STORE_IN_MEMORY);
+        cacheService.evictEntries(Ci.nsICache.STORE_ON_DISK);
+      }
+      catch (e) {}
+      try {
+        Cc["@mozilla.org/netwerk/cache-storage-service;1"]
+          .getService(Ci.nsICacheStorageService)
+          .clear();
+      }
+      catch (e) {}
+    }
+    if (aTopic === 'isteaks' && aData === 'faq-control') {
+      tabs.open('http://firefox.add0n.com/speed-tweaks.html?type=m');
+    }
+    if (aTopic === 'isteaks' && aData === 'support-control') {
+      tabs.open('https://github.com/schomery/speedyfox/issues');
+    }
+  }
 });

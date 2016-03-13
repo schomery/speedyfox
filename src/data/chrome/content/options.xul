@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting type="bool" pref="network.http.pipelining" title="network.http.pipelining" desc="Recommended value is True"/>
+  <setting type="bool" pref="network.http.pipelining.abtest" title="network.http.pipelining.abtest" desc="Recommended value is False"/>
+  <setting type="bool" pref="network.http.pipelining.aggressive" title="network.http.pipelining.aggressive" desc="Recommended value is True"/>
+  <setting type="integer" pref="network.http.pipelining.max-optimistic-requests" title="network.http.pipelining.max-optimistic-requests" desc="Recommended value is 3"/>
+  <setting type="integer" pref="network.http.pipelining.maxrequests" title="network.http.pipelining.maxrequests" desc="Recommended value is 12"/>
+  <setting type="integer" pref="network.http.pipelining.maxsize" title="network.http.pipelining.maxsize" desc="Recommended value is 300000"/>
+  <setting type="integer" pref="network.http.pipelining.read-timeout" title="network.http.pipelining.read-timeout" desc="Recommended value is 60000"/>
+  <setting type="bool" pref="network.http.pipelining.reschedule-on-timeout" title="network.http.pipelining.reschedule-on-timeout" desc="Recommended value is True"/>
+  <setting type="integer" pref="network.http.pipelining.reschedule-timeout" title="network.http.pipelining.reschedule-timeout" desc="Recommended value is 15000"/>
+  <setting type="integer" pref="network.http.pipelining.reschedule-timeout" title="network.http.pipelining.reschedule-timeout" desc="Recommended value is 15000"/>
+  <setting type="bool" pref="network.http.pipelining.ssl" title="network.http.pipelining.ssl" desc="Recommended value is True"/>
+  <setting type="bool" pref="network.http.proxy.pipelining" title="network.http.proxy.pipelining" desc="Recommended value is True"/>
+  <setting type="integer" pref="network.http.max-connections" title="network.http.max-connections" desc="Recommended value is 256"/>
+  <setting type="integer" pref="network.http.max-persistent-connections-per-proxy" title="network.http.max-persistent-connections-per-proxy" desc="Recommended value is 256"/>
+  <setting type="integer" pref="network.http.max-persistent-connections-per-server" title="network.http.max-persistent-connections-per-server" desc="Recommended value is 6"/>
+  <setting type="integer" pref="network.http.redirection-limit" title="network.http.redirection-limit" desc="Recommended value is 20"/>
+  <setting type="integer" pref="network.http.speculative-parallel-limit" title="network.http.speculative-parallel-limit" desc="Recommended value is 0"/>
+  <setting type="bool" pref="network.http.fast-fallback-to-IPv4" title="network.http.fast-fallback-to-IPv4" desc="Recommended value is True"/>
+  <setting type="bool" pref="network.dns.disablePrefetch" title="network.dns.disablePrefetch" desc="Recommended value is True"/>
+  <setting type="bool" pref="network.prefetch-next" title="network.prefetch-next" desc="Recommended value is False"/>
+  <setting type="integer" pref="browser.cache.use_new_backend" title="browser.cache.use_new_backend" desc="Recommended value is 1"/>
+
+  <setting title="Set recommended values for all preferences:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'recommended-control');"/>
+  </setting>
+  <setting title="Reset all preferences back to the factory values:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'reset-control');"/>
+  </setting>
+  <setting title="Clear browser Cache:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'clear-cache');"/>
+  </setting>
+  <setting title="Open FAQs page:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'faq-control');"/>
+  </setting>
+  <setting title="Open support page:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'support-control');"/>
+  </setting>
+  <setting type="bool" pref="extensions.jid1-wZqm19rJzRkZUA@jetpack.welcome" title="Open FAQs on upgrade:" desc="Extension will notify you about the recent update by opening the welcome page."/>
+
+</vbox>
+
+
+
