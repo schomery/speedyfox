@@ -22,6 +22,7 @@
   <setting type="bool" pref="network.dns.disablePrefetch" title="network.dns.disablePrefetch" desc="Recommended value is True"/>
   <setting type="bool" pref="network.prefetch-next" title="network.prefetch-next" desc="Recommended value is False"/>
   <setting type="integer" pref="browser.cache.use_new_backend" title="browser.cache.use_new_backend" desc="Recommended value is 1"/>
+  <setting type="integer" pref="nglayout.initialpaint.delay" title="nglayout.initialpaint.delay" desc="Recommended value is 0; to create the pref change the value once. Lower values will make a page initially display more quickly, but will make the page take longer to finish rendering"/>
 
   <setting title="Set recommended values for all preferences:" type="control">
     <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'recommended-control');"/>

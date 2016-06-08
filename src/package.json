@@ -5,7 +5,7 @@
   "description": "This extension provides a list to almost all the settings that you may need to alter in order to enhance Firefox's speed.",
   "author": "Jeremy Schomery",
   "license": "MPL 2.0",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "main": "./lib/main.js",
   "engines": {
     "firefox": ">=38.0",

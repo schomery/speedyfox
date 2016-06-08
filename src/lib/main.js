@@ -49,7 +49,8 @@ var list = {
   'network.http.fast-fallback-to-IPv4': true,
   'network.dns.disablePrefetch': true,
   'network.prefetch-next': false,
-  'browser.cache.use_new_backend': 1
+  'browser.cache.use_new_backend': 1,
+  'nglayout.initialpaint.delay': 0
 };
 
 if (sp.prefs.welcome === undefined) {
@@ -111,7 +112,7 @@ exports.onUnload = function (reason) {
       sp.prefs.welcome = true;
     }
     if (aTopic === 'isteaks' && aData === 'clear-cache') {
-      let cacheService = Cc["@mozilla.org/network/cache-service;1"]
+      let cacheService = Cc['@mozilla.org/network/cache-service;1']
         .getService(Ci.nsICacheService);
 
       try {
@@ -120,7 +121,7 @@ exports.onUnload = function (reason) {
       }
       catch (e) {}
       try {
-        Cc["@mozilla.org/netwerk/cache-storage-service;1"]
+        Cc['@mozilla.org/netwerk/cache-storage-service;1']
           .getService(Ci.nsICacheStorageService)
           .clear();
       }
