@@ -5,9 +5,18 @@ var self = require('sdk/self');
 var timers = require('sdk/timers');
 var tabs = require('sdk/tabs');
 var unload = require('sdk/system/unload');
+var notifications = require('sdk/notifications');
 var {Ci, Cc, Cu} = require('chrome');
 
 var {Services} = Cu.import('resource://gre/modules/Services.jsm');
+
+function notify (text) {
+  notifications.notify({
+    title: 'Speed Tweaks (SpeedyFox)',
+    text,
+    iconURL: './icons/128.png'
+  });
+}
 
 var prefs = (function () {
   var p = require('sdk/preferences/service');
@@ -104,12 +113,14 @@ exports.onUnload = function (reason) {
         prefs.reset(p);
       }
       sp.prefs.welcome = true;
+      notify('All preferences are reset to the default values');
     }
     if (aTopic === 'isteaks' && aData === 'recommended-control') {
       for (let p in list) {
         prefs.set(p, list[p]);
       }
       sp.prefs.welcome = true;
+      notify('All preferences are set to the recommended values. It is recommended to review each pref manually as well.');
     }
     if (aTopic === 'isteaks' && aData === 'clear-cache') {
       let cacheService = Cc['@mozilla.org/network/cache-service;1']
@@ -126,6 +137,7 @@ exports.onUnload = function (reason) {
           .clear();
       }
       catch (e) {}
+      notify('Disk cache and memory cache are cleared');
     }
     if (aTopic === 'isteaks' && aData === 'faq-control') {
       tabs.open('http://firefox.add0n.com/speed-tweaks.html?type=m');

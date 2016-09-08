@@ -1,6 +1,13 @@
 <?xml version="1.0"?>
 
 <vbox xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <setting title="Set recommended values for all preferences:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'recommended-control');"/>
+  </setting>
+  <setting title="Reset all preferences back to the factory values:" type="control">
+    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'reset-control');"/>
+  </setting>
+
   <setting type="bool" pref="network.http.pipelining" title="network.http.pipelining" desc="Recommended value is True"/>
   <setting type="bool" pref="network.http.pipelining.abtest" title="network.http.pipelining.abtest" desc="Recommended value is False"/>
   <setting type="bool" pref="network.http.pipelining.aggressive" title="network.http.pipelining.aggressive" desc="Recommended value is True"/>
@@ -24,24 +31,14 @@
   <setting type="integer" pref="browser.cache.use_new_backend" title="browser.cache.use_new_backend" desc="Recommended value is 1"/>
   <setting type="integer" pref="nglayout.initialpaint.delay" title="nglayout.initialpaint.delay" desc="Recommended value is 0; to create the pref change the value once. Lower values will make a page initially display more quickly, but will make the page take longer to finish rendering"/>
 
-  <setting title="Set recommended values for all preferences:" type="control">
-    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'recommended-control');"/>
-  </setting>
-  <setting title="Reset all preferences back to the factory values:" type="control">
-    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'reset-control');"/>
-  </setting>
   <setting title="Clear browser Cache:" type="control">
     <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'clear-cache');"/>
   </setting>
   <setting title="Open FAQs page:" type="control">
-    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'faq-control');"/>
+    <button label="Open" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'faq-control');"/>
   </setting>
   <setting title="Open support page:" type="control">
-    <button label="Apply" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'support-control');"/>
+    <button label="Open" oncommand="Components.classes['@mozilla.org/observer-service;1'].getService(Components.interfaces.nsIObserverService).notifyObservers(null, 'isteaks', 'support-control');"/>
   </setting>
   <setting type="bool" pref="extensions.jid1-wZqm19rJzRkZUA@jetpack.welcome" title="Open FAQs on upgrade:" desc="Extension will notify you about the recent update by opening the welcome page."/>
-
 </vbox>
-
-
-

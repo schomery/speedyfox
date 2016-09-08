@@ -5,13 +5,14 @@
     <em:type>2</em:type>
     <em:bootstrap>true</em:bootstrap>
     <em:unpack>false</em:unpack>
-    <em:version>0.1.8</em:version>
+    <em:version>0.1.9</em:version>
     <em:name>Speed Tweaks (SpeedyFox)</em:name>
     <em:description>This extension provides a list to almost all the settings that you may need to alter in order to enhance Firefox&apos;s speed.</em:description>
     <em:creator>Jeremy Schomery</em:creator>
-
+    <em:multiprocessCompatible>true</em:multiprocessCompatible>
     <em:optionsURL>chrome://isteaks/content/options.xul</em:optionsURL>
     <em:optionsType>2</em:optionsType>
+    <em:homepageURL>http://firefox.add0n.com/speed-tweaks.html</em:homepageURL>
 
     <em:targetApplication>
       <Description>
